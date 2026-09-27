@@ -1,0 +1,195 @@
+Bluetooth is ON. Scanning for TK5...
+>>> Found: TK5 28DC [A3FC7FF9-F8FA-C9A7-4937-58EE12183530]. Connecting...
+Connected to TK5 28DC
+ - Service: BE940000-7333-BE46-B7AE-689E71722BD5
+ - Service: 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
+ - Service: FEE7
+ - Service: Heart Rate
+ - Service: AE00
+   * Characteristic: BE940001-7333-BE46-B7AE-689E71722BD5 Properties: CBCharacteristicProperties(rawValue: 44)
+     [Subscribing to BE940001-7333-BE46-B7AE-689E71722BD5]
+   * Characteristic: BE940002-7333-BE46-B7AE-689E71722BD5 Properties: CBCharacteristicProperties(rawValue: 4)
+   * Characteristic: BE940003-7333-BE46-B7AE-689E71722BD5 Properties: CBCharacteristicProperties(rawValue: 32)
+     [Subscribing to BE940003-7333-BE46-B7AE-689E71722BD5]
+   * Characteristic: 6E400002-B5A3-F393-E0A9-E50E24DCCA9E Properties: CBCharacteristicProperties(rawValue: 12)
+   * Characteristic: 6E400003-B5A3-F393-E0A9-E50E24DCCA9E Properties: CBCharacteristicProperties(rawValue: 16)
+     [Subscribing to 6E400003-B5A3-F393-E0A9-E50E24DCCA9E]
+   * Characteristic: FEC9 Properties: CBCharacteristicProperties(rawValue: 2)
+   * Characteristic: FEA1 Properties: CBCharacteristicProperties(rawValue: 34)
+     [Subscribing to FEA1]
+   * Characteristic: FEA2 Properties: CBCharacteristicProperties(rawValue: 42)
+     [Subscribing to FEA2]
+   * Characteristic: 2A37 Properties: CBCharacteristicProperties(rawValue: 16)
+     [Subscribing to 2A37]
+   * Characteristic: 2A38 Properties: CBCharacteristicProperties(rawValue: 2)
+   * Characteristic: AE01 Properties: CBCharacteristicProperties(rawValue: 4)
+   * Characteristic: AE02 Properties: CBCharacteristicProperties(rawValue: 16)
+     [Subscribing to AE02]
+      > Writing command 210000 to 6E400002-B5A3-F393-E0A9-E50E24DCCA9E
+      > Writing command 210000 to AE01
+[2026-06-13 20:30:00 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:01 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:01 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+      > Writing command 010000 to 6E400002-B5A3-F393-E0A9-E50E24DCCA9E
+      > Writing command 010000 to AE01
+[2026-06-13 20:30:02 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:03 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+      > Writing command 030000 to 6E400002-B5A3-F393-E0A9-E50E24DCCA9E
+      > Writing command 030000 to AE01
+[2026-06-13 20:30:03 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:04 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+      > Writing command 690101 to 6E400002-B5A3-F393-E0A9-E50E24DCCA9E
+      > Writing command 690101 to AE01
+[2026-06-13 20:30:05 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:06 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:07 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:07 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:08 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:09 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:09 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:10 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:11 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:11 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:12 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:13 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:13 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:14 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:15 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:15 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:16 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:17 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:17 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:18 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:19 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:20 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:20 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:21 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:22 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:22 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:23 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:24 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:24 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:25 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:26 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:26 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:27 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:28 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:28 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:29 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:30 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:30 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:31 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:32 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:32 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:33 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:34 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:34 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:35 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:36 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:36 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:37 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:38 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:38 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:40 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:40 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:41 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:42 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:42 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:43 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:44 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:44 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:45 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:46 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:46 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:47 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:48 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:48 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:49 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:50 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:50 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:51 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:52 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:52 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:53 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:54 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:55 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:55 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:56 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:57 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:57 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:58 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:30:59 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:30:59 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:00 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:01 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:31:01 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:02 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:03 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:31:03 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:04 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM
+[2026-06-13 20:31:05 +0000] Data from FEA1 (Len 10): 07 00 00 00 00 00 00 00 00 00
+[2026-06-13 20:31:05 +0000] Data from 2A37 (Len 2): 04 00
+>>> [STANDARD HR] Value: 0 BPM

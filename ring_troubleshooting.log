@@ -1,0 +1,73 @@
+[STATE] Bluetooth is ON. Scanning...
+[FOUND] TK5 28DC [A3FC7FF9-F8FA-C9A7-4937-58EE12183530] RSSI: -57
+[ACTION] Stopping scan and attempting connection...
+[SUCCESS] Connected to TK5 28DC.
+[ACTION] Discovering services...
+[INFO] Found 5 services.
+  - Service: BE940000-7333-BE46-B7AE-689E71722BD5
+  - Service: 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
+  - Service: FEE7
+  - Service: Heart Rate
+  - Service: AE00
+[INFO] Found 3 characteristics for BE940000-7333-BE46-B7AE-689E71722BD5
+    * Char: BE940001-7333-BE46-B7AE-689E71722BD5 Props: CBCharacteristicProperties(rawValue: 44)
+    * Char: BE940002-7333-BE46-B7AE-689E71722BD5 Props: CBCharacteristicProperties(rawValue: 4)
+    * Char: BE940003-7333-BE46-B7AE-689E71722BD5 Props: CBCharacteristicProperties(rawValue: 32)
+[INFO] Found 2 characteristics for 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
+    * Char: 6E400002-B5A3-F393-E0A9-E50E24DCCA9E Props: CBCharacteristicProperties(rawValue: 12)
+    * Char: 6E400003-B5A3-F393-E0A9-E50E24DCCA9E Props: CBCharacteristicProperties(rawValue: 16)
+      [ACTION] Subscribing to 6E400003-B5A3-F393-E0A9-E50E24DCCA9E
+[INFO] Found 3 characteristics for FEE7
+    * Char: FEC9 Props: CBCharacteristicProperties(rawValue: 2)
+    * Char: FEA1 Props: CBCharacteristicProperties(rawValue: 34)
+    * Char: FEA2 Props: CBCharacteristicProperties(rawValue: 42)
+[INFO] Found 2 characteristics for Heart Rate
+    * Char: 2A37 Props: CBCharacteristicProperties(rawValue: 16)
+      [ACTION] Subscribing to 2A37
+    * Char: 2A38 Props: CBCharacteristicProperties(rawValue: 2)
+[INFO] Found 2 characteristics for AE00
+    * Char: AE01 Props: CBCharacteristicProperties(rawValue: 4)
+    * Char: AE02 Props: CBCharacteristicProperties(rawValue: 16)
+      [ACTION] Subscribing to AE02
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 6c 69 62 2d 6f 70 65 6e 20 61 6c 67 6f 3a 30 2c 77 65 61 72 3a 30 2c 66 61 63 74 6f 72 79 3a 31 2c 64 69 73 3a 46
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 61 70 70 5f 6c 65 64 5f 73 65 74 20 33 2c 30 2c 31 34
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 61 70 70 5f 6c 65 64 5f 73 65 74 20 34 2c 30 2c 31 34
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 6c 69 62 2d 6f 70 65 6e 20 61 6c 67 6f 3a 30 2c 77 65 61 72 3a 30 2c 66 61 63 74 6f 72 79 3a 31 2c 64 69 73 3a 46
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 6c 69 62 2d 6f 70 65 6e 20 61 6c 67 6f 3a 30 2c 77 65 61 72 3a 30 2c 66 61 63 74 6f 72 79 3a 31 2c 64 69 73 3a 46
+[DATA] 2A37: 04 00
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 6c 69 62 2d 6f 70 65 6e 20 61 6c 67 6f 3a 30 2c 77 65 61 72 3a 30 2c 66 61 63 74 6f 72 79 3a 31 2c 64 69 73 3a 46
+[DATA] 2A37: 04 00
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 61 70 70 5f 6c 65 64 5f 73 65 74 20 32 2c 30 2c 34
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 61 70 70 5f 6c 65 64 5f 73 65 74 20 34 2c 31 2c 30
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 6c 69 62 2d 6f 70 65 6e 20 61 6c 67 6f 3a 30 2c 77 65 61 72 3a 30 2c 66 61 63 74 6f 72 79 3a 31 2c 64 69 73 3a 46
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 6E400003-B5A3-F393-E0A9-E50E24DCCA9E: 4d 45 41 53 5f 45 56 54 5f 41 43 54 5f 53 54 41 54 45 20 3d 20 31 2c 30 2e 2e 2e 2e 2e 2e
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[DATA] 2A37: 04 00
+[ERROR] Bluetooth is OFF.
+[STATE] Bluetooth is ON. Scanning...
+[ERROR] Bluetooth is OFF.
+[STATE] Bluetooth is ON. Scanning...

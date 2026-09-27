@@ -1,0 +1,10 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project PulseLoopIOS/PulseLoop.xcodeproj -scheme PulseLoop -configuration Debug -destination generic/platform=iOS
+
+2026-06-13 17:18:10.075 xcodebuild[79775:23108593] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-06-13 17:18:10.089 xcodebuild[79775:23108593] Writing error result bundle to /var/folders/5k/_ndh_h811n5grw7b53v7wql40000gq/T/ResultBundle_2026-13-06_17-18-0010.xcresult
+xcodebuild: error: Unable to find a destination matching the provided destination specifier:
+		{ generic:1, platform:iOS }
+
+	Ineligible destinations for the "PulseLoop" scheme:
+		{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device, error:iOS 26.5 is not installed. Please download and install the platform from Xcode > Settings > Components. }
