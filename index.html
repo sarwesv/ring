@@ -74,6 +74,9 @@
     <button id="hr" class="ghost" disabled>Heart rate</button>
     <button id="spo2" class="ghost" disabled>SpO2</button>
     <button id="sync" class="ghost" disabled>Set clock</button>
+    <label style="font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:5px;cursor:pointer">
+      <input type="checkbox" id="allDevices"> show all devices (debug)
+    </label>
     <span class="status"><span id="dot" class="dot"></span><span id="stat">Not connected</span></span>
   </div>
 
@@ -97,8 +100,8 @@
     <div class="card"><div class="label">Ring clock</div><div class="val" style="font-size:16px" id="clock">—</div></div>
   </div>
 
-  <details>
-    <summary>Raw frame log</summary>
+  <details open>
+    <summary>Log / diagnostics</summary>
     <div id="log"></div>
   </details>
 </div>
@@ -225,16 +228,43 @@ function parseTK9(dv) {
   }
 }
 
+function fail(stage, err) {
+  const msg = `${err.name || "Error"}: ${err.message || err}`;
+  $("stat").textContent = msg;
+  log(`[${stage}] ${msg}`);
+  // Friendlier hints for the common failure modes.
+  if (err.name === "NotFoundError")
+    log("  hint: picker was empty or cancelled. The ring may not be advertising " +
+        "(macOS can hold it as an HID device). Toggle Bluetooth off/on, then Connect " +
+        "within ~5s. Or tick 'show all devices' to see what IS nearby.");
+  if (err.name === "SecurityError")
+    log("  hint: not a secure context / permission denied. Use https and allow " +
+        "Bluetooth for this browser in System Settings → Privacy & Security → Bluetooth.");
+  if (err.name === "NetworkError")
+    log("  hint: GATT connect failed — the ring was found but dropped. Keep it close/awake and retry.");
+}
+
 async function connect() {
   if (device && device.gatt.connected) { device.gatt.disconnect(); return; }
+  if (!window.isSecureContext) { log("[ctx] not a secure context — Web Bluetooth needs https"); }
+  if (navigator.bluetooth.getAvailability) {
+    const avail = await navigator.bluetooth.getAvailability();
+    log("[ctx] bluetooth adapter available: " + avail);
+  }
   cfg = MODELS[$("model").value];
+  const debug = $("allDevices").checked;
   try {
-    $("stat").textContent = "Requesting device…";
-    device = await navigator.bluetooth.requestDevice({
-      filters: [{ namePrefix: cfg.namePrefix }],
-      optionalServices: OPT_SERVICES,
-    });
-    device.addEventListener("gattserverdisconnected", () => { setConnected(false); writeChar = null; });
+    $("stat").textContent = "Opening device picker…";
+    log(debug ? "[picker] acceptAllDevices (debug)" : `[picker] filter namePrefix='${cfg.namePrefix}'`);
+    const opts = debug
+      ? { acceptAllDevices: true, optionalServices: OPT_SERVICES }
+      : { filters: [{ namePrefix: cfg.namePrefix }], optionalServices: OPT_SERVICES };
+    device = await navigator.bluetooth.requestDevice(opts);
+    log("[picker] selected: " + (device.name || "(unnamed) " + device.id));
+  } catch (err) { return fail("picker", err); }
+
+  try {
+    device.addEventListener("gattserverdisconnected", () => { setConnected(false); writeChar = null; log("[gatt] disconnected"); });
     $("stat").textContent = "Connecting…";
     const server = await device.gatt.connect();
     const svc = await server.getPrimaryService(cfg.service);
@@ -245,10 +275,7 @@ async function connect() {
     setConnected(true);
     log("connected to " + (device.name || cfg.namePrefix));
     if (cfg.op.ACTIVITY !== undefined) await send(cfg.op.ACTIVITY); // prime the display
-  } catch (err) {
-    $("stat").textContent = "Error: " + err.message;
-    log("error: " + err.message);
-  }
+  } catch (err) { fail("gatt", err); }
 }
 
 $("connect").addEventListener("click", connect);
