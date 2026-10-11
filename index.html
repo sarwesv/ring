@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TK9 Ring</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card: #ffffff; --ink: #1a1d21; --muted: #6b7280;
+    --line: #e4e7eb; --accent: #4f46e5; --good: #16a34a; --warn: #d97706; --bad: #dc2626;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --card: #171a21; --ink: #e8eaed; --muted: #9aa1ac;
+      --line: #262b34; --accent: #818cf8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --card: #171a21; --ink: #e8eaed; --muted: #9aa1ac;
+    --line: #262b34; --accent: #818cf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 0 16px 48px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { padding: 28px 0 12px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; align-items: center; }
+  button {
+    font: inherit; font-weight: 600; color: #fff; background: var(--accent);
+    border: 0; border-radius: 9px; padding: 9px 14px; cursor: pointer;
+  }
+  button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+  select { font: inherit; font-weight: 600; color: var(--ink); background: var(--card);
+           border: 1px solid var(--line); border-radius: 9px; padding: 9px 12px; cursor: pointer; }
+  select:disabled { opacity: .55; cursor: not-allowed; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .status { margin-left: auto; font-size: 13px; color: var(--muted); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 6px; vertical-align: middle; }
+  .dot.on { background: var(--good); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .card .label { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .card .val { font-size: 30px; font-weight: 700; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .card .unit { font-size: 15px; font-weight: 500; color: var(--muted); }
+  .note { font-size: 12px; color: var(--muted); margin-top: 4px; min-height: 1em; }
+  details { margin-top: 20px; }
+  summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  #log { font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap;
+         background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+         padding: 12px; margin-top: 10px; max-height: 260px; overflow: auto; }
+  .banner { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--warn);
+            border-radius: 10px; padding: 12px 14px; font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>TK9 Ring</h1>
+    <div class="sub">Live readings over Web Bluetooth · service <code id="svc">56FF</code></div>
+  </header>
+
+  <div class="bar">
+    <select id="model" aria-label="Ring model">
+      <option value="TK9">TK9</option>
+      <option value="TK5">TK5</option>
+    </select>
+    <button id="connect">Connect ring</button>
+    <button id="activity" class="ghost" disabled>Refresh activity</button>
+    <button id="hr" class="ghost" disabled>Heart rate</button>
+    <button id="spo2" class="ghost" disabled>SpO2</button>
+    <button id="sync" class="ghost" disabled>Set clock</button>
+    <span class="status"><span id="dot" class="dot"></span><span id="stat">Not connected</span></span>
+  </div>
+
+  <div id="unsupported" class="banner" hidden>
+    This browser has no Web Bluetooth. Open this page in <b>Chrome</b> or <b>Edge</b> on desktop
+    (Safari and Firefox don't support it).
+  </div>
+
+  <div id="rawOnly" class="banner" hidden>
+    <b>TK5 is raw-only.</b> It uses a different protocol (Nordic UART) that isn't decoded here,
+    so you'll see live frames in the log below but no parsed metrics. Full decoding is implemented
+    for the <b>TK9</b>.
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="label">Battery</div><div class="val"><span id="battery">—</span><span class="unit">%</span></div></div>
+    <div class="card"><div class="label">Steps</div><div class="val" id="steps">—</div></div>
+    <div class="card"><div class="label">Heart rate</div><div class="val"><span id="hrVal">—</span><span class="unit">bpm</span></div><div class="note" id="hrNote"></div></div>
+    <div class="card"><div class="label">SpO2</div><div class="val"><span id="spo2Val">—</span><span class="unit">%</span></div><div class="note" id="spo2Note"></div></div>
+    <div class="card"><div class="label">Distance / Calories</div><div class="val" style="font-size:20px" id="dc">—</div></div>
+    <div class="card"><div class="label">Ring clock</div><div class="val" style="font-size:16px" id="clock">—</div></div>
+  </div>
+
+  <details>
+    <summary>Raw frame log</summary>
+    <div id="log"></div>
+  </details>
+</div>
+
+<script>
+"use strict";
+// Per-model BLE config. TK9 is the fully reverse-engineered + validated one
+// (ported from tk9_fetch.swift). TK5 uses a different stack (Nordic UART +
+// Jieli framing) whose decoding was never confirmed, so it runs in raw mode.
+const MODELS = {
+  TK9: {
+    namePrefix: "TK9",
+    service: 0x56ff, write: 0x33f3, notify: 0x33f4,
+    verified: true,
+    op: { TIME: 0x01, ACTIVITY: 0x02, HR_START: 0x14, HR_STOP: 0x15, SPO2: 0x23 },
+    parse: parseTK9,
+  },
+  TK5: {
+    namePrefix: "TK5",
+    service: "6e400001-b5a3-f393-e0a9-e50e24dcca9e",
+    write:   "6e400002-b5a3-f393-e0a9-e50e24dcca9e",
+    notify:  "6e400003-b5a3-f393-e0a9-e50e24dcca9e",
+    verified: false,
+    op: {},            // commands not validated for this model
+    parse: () => {},   // raw frames only (logged by the wrapper)
+  },
+};
+const OPT_SERVICES = [0x56ff, "6e400001-b5a3-f393-e0a9-e50e24dcca9e"];
+
+let device = null, writeChar = null, cfg = MODELS.TK9;
+const $ = (id) => document.getElementById(id);
+const toggles = ["activity", "hr", "spo2", "sync"];
+
+function log(msg) {
+  const el = $("log");
+  el.textContent += msg + "\n";
+  el.scrollTop = el.scrollHeight;
+}
+function hex(bytes) { return [...bytes].map(b => b.toString(16).padStart(2, "0")).join(" "); }
+
+function setConnected(on) {
+  $("dot").classList.toggle("on", on);
+  $("stat").textContent = on ? "Connected" : "Not connected";
+  $("connect").textContent = on ? "Disconnect" : "Connect ring";
+  $("model").disabled = on;                 // lock model while connected
+  // Metric commands only exist for verified models (TK9); TK5 is raw-only.
+  toggles.forEach(id => $(id).disabled = !on || !cfg.verified);
+}
+
+// Reflect the selected model in the UI (verified vs raw-only).
+function applyModel() {
+  cfg = MODELS[$("model").value];
+  const svc = typeof cfg.service === "number"
+    ? cfg.service.toString(16).toUpperCase() : cfg.service.slice(0, 8).toUpperCase();
+  $("svc").textContent = svc;
+  const raw = $("rawOnly");
+  raw.hidden = cfg.verified;
+  ["battery", "steps", "hrVal", "spo2Val", "dc", "clock"].forEach(id => $(id).textContent = "—");
+  ["hrNote", "spo2Note"].forEach(id => $(id).textContent = "");
+}
+
+// Build a padded 20-byte command frame.
+function frame(op, payload = []) {
+  const f = new Uint8Array(20);
+  f[0] = op;
+  payload.forEach((b, i) => { f[i + 1] = b & 0xff; });
+  return f;
+}
+function le32(v) { return [v & 0xff, (v >> 8) & 0xff, (v >> 16) & 0xff, (v >>> 24) & 0xff]; }
+
+async function send(op, payload = []) {
+  if (!writeChar || op === undefined) return;
+  const f = frame(op, payload);
+  log("-> " + hex(f));
+  await writeChar.writeValue(f);
+}
+
+// Ring stores wall-clock as a local epoch (UTC + local offset), same as the
+// Swift client.
+function localEpoch() {
+  return Math.floor(Date.now() / 1000) - new Date().getTimezoneOffset() * 60;
+}
+function fmtDevTime(ts) {
+  // ts is already local wall-time as epoch; render its UTC face to avoid a
+  // second offset.
+  const d = new Date(ts * 1000);
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getUTCFullYear()}-${p(d.getUTCMonth() + 1)}-${p(d.getUTCDate())} ` +
+         `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
+}
+
+// Notify handler: always log raw, then hand to the active model's parser.
+function parse(dv) {
+  log("<- " + hex(new Uint8Array(dv.buffer)));
+  cfg.parse(dv);
+}
+
+function parseTK9(dv) {
+  const b = new Uint8Array(dv.buffer);
+  const op = dv.getUint8(0);
+  const payloadNonZero = b.slice(1).some(x => x !== 0);
+  switch (op) {
+    case 0x03: { // activity: ts(4) steps(4) distance(4) calories(4)
+      $("steps").textContent = dv.getUint32(5, true);
+      $("dc").textContent = `${dv.getUint32(9, true)} / ${dv.getUint32(13, true)}`;
+      $("clock").textContent = fmtDevTime(dv.getUint32(1, true));
+      break;
+    }
+    case 0x0b: // battery
+      $("battery").textContent = dv.getUint8(1);
+      break;
+    case 0x14: { // heart rate: ts(4) then bpm at byte 5
+      const bpm = dv.getUint8(5);
+      if (bpm > 0) { $("hrVal").textContent = bpm; $("hrNote").textContent = "live"; }
+      break;
+    }
+    case 0x24: { // SpO2 result: ts(4) then value at byte 5
+      if (!payloadNonZero) { $("spo2Note").textContent = "measuring…"; break; }
+      const v = dv.getUint8(5);
+      if (v >= 70 && v <= 100) { $("spo2Val").textContent = v; $("spo2Note").textContent = "ok"; }
+      else { $("spo2Note").textContent = `no valid reading (status ${v}) — wear snug/still`; }
+      break;
+    }
+  }
+}
+
+async function connect() {
+  if (device && device.gatt.connected) { device.gatt.disconnect(); return; }
+  cfg = MODELS[$("model").value];
+  try {
+    $("stat").textContent = "Requesting device…";
+    device = await navigator.bluetooth.requestDevice({
+      filters: [{ namePrefix: cfg.namePrefix }],
+      optionalServices: OPT_SERVICES,
+    });
+    device.addEventListener("gattserverdisconnected", () => { setConnected(false); writeChar = null; });
+    $("stat").textContent = "Connecting…";
+    const server = await device.gatt.connect();
+    const svc = await server.getPrimaryService(cfg.service);
+    writeChar = await svc.getCharacteristic(cfg.write);
+    const notify = await svc.getCharacteristic(cfg.notify);
+    await notify.startNotifications();
+    notify.addEventListener("characteristicvaluechanged", (e) => parse(e.target.value));
+    setConnected(true);
+    log("connected to " + (device.name || cfg.namePrefix));
+    if (cfg.op.ACTIVITY !== undefined) await send(cfg.op.ACTIVITY); // prime the display
+  } catch (err) {
+    $("stat").textContent = "Error: " + err.message;
+    log("error: " + err.message);
+  }
+}
+
+$("connect").addEventListener("click", connect);
+$("model").addEventListener("change", applyModel);
+$("activity").addEventListener("click", () => send(cfg.op.ACTIVITY));
+$("hr").addEventListener("click", async () => {
+  $("hrNote").textContent = "measuring…";
+  await send(cfg.op.HR_START);
+  setTimeout(() => send(cfg.op.HR_STOP), 12000);
+});
+$("spo2").addEventListener("click", () => { $("spo2Note").textContent = "starting…"; send(cfg.op.SPO2); });
+$("sync").addEventListener("click", async () => {
+  await send(cfg.op.TIME, le32(localEpoch()));
+  setTimeout(() => send(cfg.op.ACTIVITY), 800);
+});
+
+if (!navigator.bluetooth) {
+  $("unsupported").hidden = false;
+  $("connect").disabled = true;
+  $("model").disabled = true;
+}
+applyModel();
+</script>
+</body>
+</html>
